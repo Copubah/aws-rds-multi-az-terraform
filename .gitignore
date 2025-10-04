@@ -1,0 +1,56 @@
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Terraform cache and plugins
+.terraform/
+.terraform.lock.hcl
+
+# Terraform plan files
+*.tfplan
+
+# Sensitive variable files (keep examples)
+*.tfvars
+!environments/*.tfvars
+*.pem
+*.key
+
+# Lambda build artifacts
+lambda/lambda.zip
+*.zip
+
+# IDE / editor files
+.vscode/
+*.swp
+*.swo
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Logs
+*.log
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+.tmp/
+temp/
