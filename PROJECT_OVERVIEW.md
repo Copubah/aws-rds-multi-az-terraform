@@ -7,12 +7,12 @@ This Terraform project creates a production-ready AWS RDS MySQL database with mu
 ## Architecture Components
 
 ### Core Infrastructure
-- **VPC**: Multi-AZ VPC with public/private subnets, NAT gateways, and proper routing
-- **RDS**: Multi-AZ MySQL 8.0 with enhanced monitoring, encryption, and automated backups
-- **EC2**: Optional bastion host for database connectivity testing
-- **Lambda**: Python-based health checker with VPC connectivity
-- **SNS**: Email notification system for alerts
-- **CloudWatch**: Comprehensive monitoring, alarms, and log management
+- VPC: Multi-AZ VPC with public/private subnets, NAT gateways, and proper routing
+- RDS: Multi-AZ MySQL 8.0 with enhanced monitoring, encryption, and automated backups
+- EC2: Optional bastion host for database connectivity testing
+- Lambda: Python-based health checker with VPC connectivity
+- SNS: Email notification system for alerts
+- CloudWatch: Comprehensive monitoring, alarms, and log management
 
 ### Security Features
 - VPC with private subnets for database isolation
