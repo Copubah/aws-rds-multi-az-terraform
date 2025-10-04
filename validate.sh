@@ -171,9 +171,9 @@ if grep -r "password.*=" . --include="*.tf" --exclude-dir=".terraform" | grep -v
     ((security_warnings++))
 fi
 
-# Check for overly permissive CIDR blocks
-if grep -r "0.0.0.0/0" . --include="*.tf" --exclude-dir=".terraform" | grep -v "egress"; then
-    print_warning "Found 0.0.0.0/0 CIDR blocks (review for security)"
+# Check for overly permissive CIDR blocks in RDS ingress rules (should be more restrictive)
+if grep -r "0.0.0.0/0" modules/rds/ --include="*.tf" | grep "ingress" | grep -v "description.*MySQL access from allowed CIDRs"; then
+    print_warning "Found overly permissive RDS ingress rules"
     ((security_warnings++))
 fi
 

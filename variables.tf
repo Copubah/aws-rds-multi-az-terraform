@@ -15,8 +15,8 @@ variable "tags" {
   description = "Common tags for all resources"
   type        = map(string)
   default = {
-    Project     = "RDS-MultiAZ-Failover"
-    ManagedBy   = "Terraform"
+    Project   = "RDS-MultiAZ-Failover"
+    ManagedBy = "Terraform"
   }
 }
 
@@ -116,7 +116,7 @@ variable "alert_email" {
 variable "allowed_cidrs" {
   description = "CIDR blocks allowed to access RDS"
   type        = list(string)
-  default     = ["10.0.0.0/16"]  # Only VPC traffic by default
+  default     = ["10.0.0.0/16"] # Only VPC traffic by default
 }
 
 # EC2 Configuration (Optional)

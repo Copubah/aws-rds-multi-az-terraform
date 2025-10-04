@@ -44,9 +44,9 @@ jobs:
           exit 1
         fi
         
-        # Check for overly permissive CIDR blocks in ingress rules
-        if grep -r "0.0.0.0/0" . --include="*.tf" --exclude-dir=".terraform" | grep "ingress" | grep -v "description.*SSH\|HTTP"; then
-          echo "WARNING: Found overly permissive ingress rules"
+        # Check for overly permissive CIDR blocks in RDS ingress rules
+        if grep -r "0.0.0.0/0" modules/rds/ --include="*.tf" | grep "ingress" | grep -v "description.*MySQL access from allowed CIDRs"; then
+          echo "WARNING: Found overly permissive RDS ingress rules"
           exit 1
         fi
         

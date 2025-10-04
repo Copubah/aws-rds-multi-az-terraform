@@ -86,7 +86,7 @@ resource "aws_db_option_group" "main" {
 # Enhanced Monitoring Role
 resource "aws_iam_role" "rds_enhanced_monitoring" {
   count = var.enable_monitoring ? 1 : 0
-  
+
   name = "${var.environment}-rds-enhanced-monitoring"
 
   assume_role_policy = jsonencode({
@@ -107,7 +107,7 @@ resource "aws_iam_role" "rds_enhanced_monitoring" {
 
 resource "aws_iam_role_policy_attachment" "rds_enhanced_monitoring" {
   count = var.enable_monitoring ? 1 : 0
-  
+
   role       = aws_iam_role.rds_enhanced_monitoring[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
 }
@@ -138,10 +138,10 @@ resource "aws_db_instance" "main" {
   publicly_accessible    = false
 
   # Multi-AZ and backup configuration
-  multi_az               = var.multi_az
-  backup_retention_period = var.backup_retention_period
-  backup_window          = "03:00-04:00"
-  maintenance_window     = var.maintenance_window
+  multi_az                 = var.multi_az
+  backup_retention_period  = var.backup_retention_period
+  backup_window            = "03:00-04:00"
+  maintenance_window       = var.maintenance_window
   delete_automated_backups = false
 
   # Parameter and option groups
@@ -149,17 +149,17 @@ resource "aws_db_instance" "main" {
   option_group_name    = aws_db_option_group.main.name
 
   # Monitoring
-  monitoring_interval = var.enable_monitoring ? 60 : 0
-  monitoring_role_arn = var.enable_monitoring ? aws_iam_role.rds_enhanced_monitoring[0].arn : null
-  enabled_cloudwatch_logs_exports = ["error", "general", "slow_query"]
+  monitoring_interval             = var.enable_monitoring ? 60 : 0
+  monitoring_role_arn             = var.enable_monitoring ? aws_iam_role.rds_enhanced_monitoring[0].arn : null
+  enabled_cloudwatch_logs_exports = ["error", "general", "slowquery"]
 
   # Security
-  deletion_protection = var.deletion_protection
-  skip_final_snapshot = !var.deletion_protection
+  deletion_protection       = var.deletion_protection
+  skip_final_snapshot       = !var.deletion_protection
   final_snapshot_identifier = var.deletion_protection ? "${var.environment}-mysql-final-snapshot-${formatdate("YYYY-MM-DD-hhmm", timestamp())}" : null
 
   # Performance Insights
-  performance_insights_enabled = true
+  performance_insights_enabled          = true
   performance_insights_retention_period = 7
 
   tags = merge(var.tags, {
@@ -185,7 +185,7 @@ resource "aws_sns_topic" "rds_alerts" {
 
 resource "aws_sns_topic_subscription" "email" {
   count = var.alert_email != "" ? 1 : 0
-  
+
   topic_arn = aws_sns_topic.rds_alerts.arn
   protocol  = "email"
   endpoint  = var.alert_email
@@ -328,10 +328,10 @@ resource "aws_security_group" "lambda" {
 resource "aws_lambda_function" "rds_health_check" {
   filename         = data.archive_file.lambda_zip.output_path
   function_name    = "${var.environment}-rds-health-check"
-  role            = aws_iam_role.lambda_role.arn
-  handler         = "rds_health_check.lambda_handler"
-  runtime         = "python3.11"
-  timeout         = 30
+  role             = aws_iam_role.lambda_role.arn
+  handler          = "rds_health_check.lambda_handler"
+  runtime          = "python3.11"
+  timeout          = 30
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
   vpc_config {

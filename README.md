@@ -13,14 +13,14 @@ This Terraform project deploys a complete AWS RDS MySQL database with multi-AZ f
 
 ## Features
 
-- Multi-AZ RDS MySQL: with automatic failover  
-- Enhanced monitoring: with CloudWatch metrics and alarms  
-- Automated health checks: via Lambda function every 5 minutes  
-- Email alerts:for database connectivity issues  
-- Security best practices:with VPC, security groups, and encryption  
-- Modular design:for reusability across environments  
-- Multi-environment support:(dev/staging/prod)  
-- Terraform 1.6+ compatibility :with proper backend configuration  
+- Multi-AZ RDS MySQL with automatic failover
+- Enhanced monitoring with CloudWatch metrics and alarms
+- Automated health checks via Lambda function every 5 minutes
+- Email alerts for database connectivity issues
+- Security best practices with VPC, security groups, and encryption
+- Modular design for reusability across environments
+- Multi-environment support (dev/staging/prod)
+- Terraform 1.6+ compatibility with proper backend configuration  
 
 ## Prerequisites
 
@@ -44,8 +44,8 @@ Your AWS credentials need the following permissions:
 ### 1. Clone and Setup
 
 ```bash
-git clone <repository-url>
-cd terraform-rds-failover
+git clone https://github.com/Copubah/aws-rds-multi-az-terraform.git
+cd aws-rds-multi-az-terraform
 ```
 
 ### 2. Configure Backend (Optional but Recommended)
@@ -244,11 +244,11 @@ aws logs describe-log-groups --log-group-name-prefix "/aws/lambda"
 
 ## Security Best Practices
 
-1. **Use AWS Secrets Manager** for database passwords in production
-2. **Enable VPC Flow Logs** for network monitoring
-3. **Implement least privilege** IAM policies
-4. **Enable AWS Config** for compliance monitoring
-5. **Use AWS Systems Manager** for secure EC2 access instead of SSH keys
+1. Use AWS Secrets Manager for database passwords in production
+2. Enable VPC Flow Logs for network monitoring
+3. Implement least privilege IAM policies
+4. Enable AWS Config for compliance monitoring
+5. Use AWS Systems Manager for secure EC2 access instead of SSH keys
 
 ## Cleanup
 
@@ -275,7 +275,8 @@ terraform destroy -var-file="environments/dev.tfvars"
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Support
- and questions:
+
+For issues and questions:
 1. Check the troubleshooting section
 2. Review CloudWatch logs
 3. Open an issue in the repository
